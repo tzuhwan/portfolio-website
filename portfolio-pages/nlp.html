@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TzuHwan Seet</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="portfolio-page-style.css">
+    <script src="https://kit.fontawesome.com/4e98fca5ed.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+
+<body class="has-navbar-fixed-top">
+
+    <nav class="navbar is-transparent is-fixed-top is-success" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="../index.html">
+                <h2 class="title is-3 has-text-white">HWAN</h2>
+            </a>
+
+            <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu" id="navMenu">
+
+            <div class="navbar-end subtitle is-5">
+                <a class="navbar-item" href="">
+                    Resume
+                </a>
+                <a class="navbar-item" href="../index.html#portfolio">
+                    Portfolio
+                </a>
+                <a class="navbar-item" href="#footer">
+                    Contacts
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="nlp-banner hero is-medium has-text-centered">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title has-text-white is-2">
+                    Detecting Depression from Social Media Texts
+                </h1>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section hero is-medium content">
+        <p class="title is-2">Introduction</p>
+        <div>
+            <p>Depression is one of the main causes of disability globally, and suicde resulted from depression is the
+                <a href="https://www.who.int/news-room/fact-sheets/detail/depression">second leading cause of
+                    death </a>for young adults. Depression often remains undiagnosed because of social
+                stigma, so suicide preventative programs can fail to reach people who need help. With the surge of
+                social media use over the past decade, people are more likely to talk about metnal health issues and
+                emotions with online forums. Computational natural language processing methods can extract potentially
+                useful information about an individual's mental health from online discussions.
+            </p>
+            <p>As part of our Deep Learning final project, we decided to re-implement a paper, <a
+                    href="https://arxiv.org/abs/2011.01695">Detecting
+                    Early
+                    Onset of
+                    Depression from Social Media Text using Learned Confidence Scores </a></span>by Ana-Maria Bucur and
+                Liviu P. Dinu.
+                The paper seeks to develop a structural prediction that can detect early onset of depression from
+                anonymous users' posts on the Reddit platform. </p>
+        </div>
+    </section>
+
+    <section class="content-section hero is-medium content">
+        <p class="title is-2">Data</p>
+        <div>
+            <p>We utilized the <a href="https://erisk.irlab.org/">eRisk (Early Detection on the Internet) dataset</a>,
+                which is developed from
+                an annual
+                workshop held by CLEF
+                (Conference and Labs of the Evaluation Forum). We received access to the 2018 and 2020 eRisk dataset
+                from the CLEF
+                organizers. The eRisk dataset has two tasks, detecting early depression and anorexia. The paper focused
+                on early detection of depression in the 2018 data. We replicated the paper's methodology on the
+                2020 dataset.
+                The 2020 dataset has 104 depressed users and 319 non-depressed users as training data, and 40 depressed
+                and 30
+                non-depressed users as testing data. There are a total of 70,446 submissions, only 11,691 of which are
+                submitted from
+                users with depression. The submissions are over a 2-3 year range.</p>
+            <p>Before beginning the model, we had a significant amount of preprocessing to develop the NLP pipeline. The
+                initial
+                challenge was determining how to process and stem the XML data files. We had to decide as a group the
+                best way to store
+                the data and what class structure would fit best for the model.</p>
+            <pre>
+            <code class="nohighlight">
+    # A snippet of the XML file of Reddit user ID 436 in the data set. 
+    # Each subject XML file consists a series of &lt;WRITING&gt; objects.
+    &lt;INDIVIDUAL&gt;
+        &lt;ID&gt; subject436 &lt;/ID&gt;
+        &lt;WRITING&gt;
+            &lt;TITLE&gt; Hospital or no? &lt;/TITLE&gt;
+            &lt;DATE&gt; 2018-07-09 05:18:12 &lt;/DATE&gt;
+            &lt;INFO&gt; reddit post &lt;/INFO&gt;
+            &lt;TEXT&gt; [removed] &lt;/TEXT&gt;
+        &lt;/WRITING&gt;
+        &lt;WRITING&gt;
+            &lt;TITLE&gt; D* on a 12 hour road trip...suggestions? &lt;/TITLE&gt;
+            &lt;DATE&gt; 2018-06-10 14:22:03 &lt;/DATE&gt;
+            &lt;INFO&gt; reddit post &lt;INFO&gt;
+            &lt;TEXT&gt;I'm traveling halfway across the country by car today with my fiance's family, returning home from a
+                family reunion. One of the kids we're traveling with woke up v*ing this morning, so I rode in the car he
+                wasn't in, hoping fhat'd help the fear. BUT. Right before we left, I had d*, and now that I'm in the car I'm
+                feeling like I need to again, and I'm terrified that the entire trip will be me needing to stop every exit
+                to d*, or worse, more of the adults start v*ing as well. I need suggestions or help to get me through this.
+                Thanks in advance. &lt;/TEXT&gt;
+        &lt;/WRITING&gt;
+    &lt;/INDIVIDUAL&gt;
+            </code>     
+            </pre>
+            <br>
+            <p>Our preprocess method set each user with the appropriate label - depressed or non-depressed. For each
+                post, we tokenized and stemmed the words in text and title. The users' texts were cleaned by
+                transforming
+                the text into lowercase and removing punctuation and stopwords. The numbers and URLs in texts were
+                replaced with specific tokens and then stemming was done with Porter Stemmer. Since the number of
+                submissions from non-depressed users is higher than that from depressed users, we downsampled the
+                majority class to ratio of 2:1. </p>
+            <br>
+            <pre>
+            <code>
+def tokenize(users):
+"""
+Extracts all data for each user and their posts.
+Creates a User instance for each subject XML file and returns them as a list.
+
+param users: A list of user objects with untokenized title and text
+return: A list of user objects with tokenized title and text and transformed to lowercase
+"""
+# A ``RegexpTokenizer`` splits a string into substrings 
+# using a regular expression.
+tokenizer = nltk.RegexpTokenizer(r"\w+")
+# load a set of commonly used English stop words 
+#(eg. “the”, “a”, “an”, “in”) that can be ignored.
+stop_words = set(stopwords.words("english"))
+porter = PorterStemmer()
+
+for user in users:
+    for post in user.posts:
+        if post.title is not None:
+            # remove the digits
+            remove_digits = str.maketrans("", "", digits)
+            post.title = post.title.translate(remove_digits)
+
+            # tokenize words, remove punctutations,transform to lower case
+            post.title = tokenizer.tokenize(post.title.lower())
+
+            # remove stopwords
+            post.title = [t for t in post.title if not t in stop_words]
+
+            # stemming of words
+            post.title = [porter.stem(word) for word in post.title]
+
+        if post.text is not None:
+            # remove the digits
+            remove_digits = str.maketrans("", "", digits)
+            post.text = post.text.translate(remove_digits)
+
+            # tokenize words, remove punctutations,transform to lower case
+            post.text = tokenizer.tokenize(post.text.lower())
+
+            # remove stopwords
+            post.text = [t for t in post.text if not t in stop_words]
+
+            # stemming of words
+            post.text = [porter.stem(word) for word in post.text]
+    return users
+            </code>
+            </pre>
+        </div>
+    </section>
+
+    <section class="content-section hero is-medium content">
+        <p class="title is-2">Method</p>
+        <div>
+            <p>We focused on the base goal of training the model to classify if a user is depressed or not based on the
+                user's entire Reddit writing history. We defined
+                our topic modelling pipeline to take in a user as input and to output a topc embedding that looks like
+                [weight of topic 1, ..., weight of topic n]. Our topic modelling pipeline determines, for each user,
+                what topics they talk about most given their total text input.
+            </p>
+            <div class="img-container">
+                <img src=" ../media/nlp_pipeline.png">
+                <p class="subtitle is-5" style="font-style: italic;">The input and output of our LSI model</p>
+            </div>
+            <br>
+            <p>First we represented each user as a bag of words(BoW). We then used
+                <a href="https://en.wikipedia.org/wiki/Latent_semantic_analysis#Latent_semantic_indexing">Latent
+                    Semantic Indexing(LSI) </a> to produce a topic embedding for each user, which we can feed into our
+                neural network layers.
+            </p>
+
+            <!-- To produceWe trained our LSI model by passing
+            in all users, our dictionary we created, as well as the number of topics we chose. Once we had our LSI
+            model trained, we printed the topics for inspection. This enabled us to see what topics the model found
+            significant as well as what words were important to each topic. With our trained LSI model in hand, we
+            used it to generate topic embeddings for each user. We passed in users(represented as bags of words)
+            into our trained LSI model, and our LSI model outputted a topic embedding for each user. -->
+
+            <pre>
+                <code>
+# The libraries that we used 
+from gensim import corpora
+from gensim import models
+from gensim.models import LsiModel
+from gensim.matutils import Sparse2Corpus, corpus2dense
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+
+def create_topic_embeddings(users):
+"""
+Receives a list of users with tokenized bag-of-words 
+and generates topic embeddings for each user.
+
+param users: A list of user objects with tokenized title and text
+return: A list of topic embeddings
+"""
+
+topic_embeddings = []
+
+# holds the value of the maximum number of token words of all users
+max_padding_length = 0
+for i, user in enumerate(users):
+    text_tokens = []
+    for post in user.posts:
+        if post.text and post.text != []:
+            text_tokens.append(post.text)
+            max_padding_length = max(max_padding_length, len(text_tokens))
+
+# Creates a topic embedding for each user using a LSI model.
+for i, user in enumerate(users):
+    text_tokens = []
+    for post in user.posts:
+        if post.text and post.text != []:
+            text_tokens.append(post.text)
+
+    # Construct word<->id mappings
+    dictionary = corpora.Dictionary(text_tokens)
+    num_terms = len(dictionary)
+    # create the bag of words(BoW) for the user
+    corpus = [dictionary.doc2bow(text) for text in text_tokens]
+
+    # step 1 -- initialize a model
+    # This module implements functionality related to the 
+    # Term Frequency - Inverse Document Frequency
+    # https://en.wikipedia.org/wiki/Tf%E2%80%93idf 
+    tfidf = models.TfidfModel(corpus)
+
+    # step 2 -- User's BoW -> TF-IDF matrix 
+    corpus_tfidf = tfidf[corpus]
+
+    # num_topics is a hyperparameter which determines 
+    # the dimensionality of the corpus
+    lsi_model = models.LsiModel(corpus_tfidf,
+                                id2word=dictionary,
+                                num_topics=128)
+
+    # Converts corpus into LSI space from TD-IDF space
+    corpus_lsi = lsi_model[corpus_tfidf]
+
+    # Convert corpus into a dense numpy 2D array, with topics as columns
+    embedding = gensim.matutils.corpus2dense(corpus_lsi, 128)
+    embedding = pad_sequences(embedding,
+                            maxlen=max_padding_length,
+                            padding="pre")
+
+topic_embeddings.append(embedding)
+
+return topic_embeddings
+                </code>
+            </pre>
+            <br>
+
+            <p>These topic embeddings were then fed into the linear layer of the neural network. Our neural network
+                architecture consists of 3 hidden layers of sizes 512, 256 and 256 respectively(after
+                experimentation), Leaky Relu and Dropout of 0.2. The last linear layer applied a sigmoid activation
+                function.</p>
+
+            <pre>
+                <code>
+topic_embeddings = create_topic_embeddings(users)
+topic_embeddings = tf.convert_to_tensor(topic_embeddings)
+
+model = keras.Sequential()
+model.add(layers.Flatten())
+
+model.add(layers.Dense(512, activation=tf.keras.layers.LeakyReLU(alpha=0.3), name="layer1"))
+model.add(layers.Dropout(0.2))
+
+model.add(layers.Dense(256, activation=tf.keras.layers.LeakyReLU(alpha=0.3), name="layer2"))
+model.add(layers.Dropout(0.2))
+
+model.add(layers.Dense(256, activation=tf.keras.layers.LeakyReLU(alpha=0.3), name="layer3"))
+model.add(layers.Dropout(0.2))
+
+model.add(layers.Dense(2, activation="sigmoid", name="layer4"))
+
+# training the model with topic embeddings
+model.fit(topic_embeddings[:-TEST_SIZE],
+            user_labels[:-TEST_SIZE],
+            batch_size=50,
+            epochs=10)
+
+# Make predictions on unseen users using trained model
+predictions = model.predict(topic_embeddings[-TEST_SIZE:])
+
+                </code>
+            </pre>
+        </div>
+    </section>
+    <section class="content-section hero is-medium content">
+        <p class="title is-2">Results</p>
+        <div>
+            <p>Since this is a binary classification test(depressed vs. non-depressed), we evaluated many statistical
+                performance measures. We did not solely rely on accuracy because it could be misleading if the
+                classifier tended to predict the label of the majority class(non-deperessed users). Although our model
+                did significantly better than the best implementation by the paper, it must be noted that the paper
+                focused on detecting the early onset of depression. This means that they sequentially trained their
+                model with a chunk of data at a time according to a specific timline(eg. 3 months worth of Reddit texts
+                at a time).</p>
+            <table class="has-text-centered">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Meaning</th>
+                        <th>Our Model Score</th>
+                        <th>Score from Paper</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Accuracy</td>
+                        <td>% correct predictions</td>
+                        <td>0.75</td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td>Precision</td>
+                        <td>no. of true positives/predicted no. of depressed users</td>
+                        <td>0.76</td>
+                        <td>0.25</td>
+                    </tr>
+                    <tr>
+                        <td>Recall</td>
+                        <td>no. of true positives/total no. of depressed users</td>
+                        <td>0.76</td>
+                        <td>0.71</td>
+                    </tr>
+                    <tr>
+                        <td>F1 Score</td>
+                        <td>2 * (Precision * Recall)/(Precision + Recall)</td>
+                        <td>0.74</td>
+                        <td>0.3</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="content-section hero is-medium content">
+        <p class="title is-2">Results</p>
+        <div>
+            <p>In order to validate these results, we also tested the model with various labels to ensure that the rate
+                of false positives/false negatives was sensible given the inputs. When we explored the topics returned
+                by the LSI model, we discovered similar patterns to the results in the paper. The posts of depressed
+                users in our dataset tend to relate to topics/themes such as <i>alone, depression, hugs, hopeful,
+                    happy/sad</i> and profanity. On the other hand, the posts of non-depressed users tend to relate to
+                hobbies or curernt affairs such as <i>swim, school, trump, instagram</i>.</p>
+
+            <br>
+            <!-- Main container -->
+            <nav class="level">
+                <!-- Left side -->
+                <div class="level-left">
+                    <div class=" img-container">
+                        <img src=" ../media/non_depressed_thoughts.png">
+                        <p class="subtitle is-4" style="font-style: italic;">Common topics for non-depressed users</p>
+                    </div>
+                </div>
+
+                <!-- Right side -->
+                <div class="level-right" style="padding-bottom: 2vh;">
+                    <div class=" img-container">
+                        <img src=" ../media/depressed_thoughts.png">
+                        <p class="subtitle is-4" style="font-style: italic;">Common topics for depressed users</p>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </section>
+
+    <section class="content-section hero is-medium content">
+        <p class="title is-2">Extensions</p>
+        <div>
+            <p>Given more time, we would definitely want to implement a model taht is able to classify if the user is
+                depressed or not with early detection confidence score. This would require us to rethink preprocessing
+                as the users' posts need to be store in a way that reflects the date of writing. We would also need to
+                implement the authors' custom loss function so that the model considers the classification output only
+                if the confidence exeeds a certain threshold.</p>
+        </div>
+    </section>
+
+    <section class="content-section hero is-medium content">
+        <div class="content">
+            <p class="title is-4">Resources & Source Code</p>
+            <ul>
+                <li><a href="https://github.com/tzuhwan/dl-final-project">Github repo</a></li>
+            </ul>
+        </div>
+
+    </section>
+
+
+
+
+    <footer class=" footer" id="footer">
+        <div class="content has-text-centered icons-container">
+            <ul class="icons-list">
+                <li><a href="mailto:tzuhwan_seet@brown.edu" class="fas fa-envelope-open-text fa-3x"></a>
+                </li>
+                <li><a href="https://github.com/tzuhwan" class="fab fa-github fa-3x"></a></li>
+                <li><a href="https://www.linkedin.com/in/tzuhwan-seet/" class="fab fa-linkedin-in fa-3x"></a></li>
+            </ul>
+        </div>
+        <br>
+        <div class="content has-text-centered">
+            <p>This website is built by TzuHwan Seet using HTML5 and Bulma CSS Framework. </p>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+/* .navbar-item {
+    display: flex;
+    flex-direction: column;
+} */
+
+
+.navbar {
+    padding: 3vh 3vh 0 3vh;
+}
+
+.title {
+  padding-bottom: 1vh;
+}
+
+.portfolio-title {
+  padding-bottom: 5vh;
+}
+
+.about-me div {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.portfolio {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.is-ancestor {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.portfolio .hero-body {
+  margin: 0 auto;
+  /* background-color: pink; */
+}
+
+
+#portfolio-link {
+  text-decoration: none;
+}
+
+#portfolio-link:hover {
+  text-decoration: underline;
+}
+
+.icons-container {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+ul.icons-list {
+  cursor: default;
+  list-style: none;
+}
+
+.icons-list li {
+  list-style-type: none;
+  padding-right: 5em;
+  float: left;
+  /* background-color: blue; */
+}
+
+.icons-list a {
+  color: black;
+}
+
+.icons-list a:hover {
+  color: blue;
+  text-decoration: none;
+}
+
+footer {
+  padding-bottom: 3em;
+}
+

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TzuHwan Seet</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="portfolio-page-style.css">
+    <script src="https://kit.fontawesome.com/4e98fca5ed.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+
+<body class="has-navbar-fixed-top">
+
+    <nav class="navbar is-transparent is-fixed-top is-success" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="../index.html">
+                <h2 class="title is-3 has-text-white">HWAN</h2>
+            </a>
+
+            <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu" id="navMenu">
+
+            <div class="navbar-end subtitle is-5">
+                <a class="navbar-item" href="">
+                    Resume
+                </a>
+                <a class="navbar-item" href="../index.html#portfolio">
+                    Portfolio
+                </a>
+                <a class="navbar-item" href="#footer">
+                    Contacts
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="nlp-banner hero is-medium has-text-centered">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title has-text-white is-2">
+                    Data Visualization with D3.js
+                </h1>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section hero is-medium content">
+        <div class="content">
+            <p>In this project I used <a href="https://d3js.org/">d3.js</a>, a powerful interactive visualization
+                library,
+                to create an interactive dashboard that explores a <a
+                    href="https://www.kaggle.com/shivamb/netflix-shows">Netflix
+                    dataset</a> that consists of tv shows and movies available on Netflix as of 2019.</p>
+            <!-- <div class=" img-container">
+                <img src=" ../media/d3-data1.png">
+                <p class="subtitle is-5" style="font-style: italic;">A snippet of the Netflix dataset</p>
+            </div> -->
+            <div>
+                <p>Some questions that I focused on are:</p>
+                <ul>
+                    <li>What are the top genres in terms of number of title on Netflix?
+                        <ul>
+                            <li>I grouped the number of
+                                movies and TV shows by genre, and then filter for titles that only have
+                                one single genre, such as "Documentaries", as opposed to "International Movies, Sci-Fi"
+                                to
+                                provide
+                                clear overviews on basic genres without sub-genres. This also helped to keep the chart
+                                visually neat.</li>
+                        </ul>
+                    </li>
+                    <li>How does the average runtime of movies evolve over the years?
+                        <ul>
+                            <li>Given the huge range of years included in the data set, I calculated the
+                                average movie lengths for every 5 years from 1945 to 2020. I also provided two sorting
+                                orders that users
+                                can toggle to observe different patterns.</li>
+                        </ul>
+                    </li>
+                    <li>What do the networks of actors/actresses who collaborated on movies look like?
+                        <ul>
+                            <li>
+                                I narrowed down the data that I needed to display by selecting only the
+                                actors who acted in Dramas Films in 2018, as the cast data for all year range is too
+                                massive. I picked
+                                the Dramas genre because it is more likely that actors in the same genres collaborate
+                                with
+                                one another.
+                                So each node is an actor/actress, and the movie in which they collaborate are the links
+                                between them.
+                                Each cluster more or less represent a movie.
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <p>Please check out my <a href="https://cs1951a-s21-brown.github.io/hw6-dataviz-tzuhwan/">D3 dashboard
+                        here</a>! Please let me know if you have other visualization ideas regarding the dataset.</p>
+            </div>
+
+
+    </section>
+
+    <footer class=" footer" id="footer">
+        <div class="content has-text-centered icons-container">
+            <ul class="icons-list">
+                <li><a href="mailto:tzuhwan_seet@brown.edu" class="fas fa-envelope-open-text fa-3x"></a></li>
+                <li><a href="https://github.com/tzuhwan" class="fab fa-github fa-3x"></a></li>
+                <li><a href="https://www.linkedin.com/in/tzuhwan-seet/" class="fab fa-linkedin-in fa-3x"></a></li>
+            </ul>
+        </div>
+        <br>
+        <div class="content has-text-centered">
+            <p>This website is built by TzuHwan Seet using HTML5 and Bulma CSS Framework. </p>
+        </div>
+    </footer>
+</body>
+
+</html>
+
+
+<!-- <div class="response">
+    <h2>Written Questions</h2>
+    <ol>
+        <li>
+            I chose to work with the Netflix data set. For the first question, I decided to group the number of
+            movies and TV shows by the "listed_in" column, and then filter for columns that only have one single
+            genre, such as "Documentaries", as opposed to "International Movies, Sci-Fi" to provide clear overviews
+            on basic genres without sub-genres. This also helped to keep the chart visually neat. <br>
+            For the 2nd question, given the huge range of years included in the data set, I decided to calculate the
+            average movie lengths for every 5 years from 1945 to 2020. I also provided two sorting orders that users
+            can toggle to observe different patterns. <br>
+            For the 3rd question, I chose to narrow down the data that I needed to display by selecting only the
+            actors who acted in Dramas Films in 2018, as the cast data for all year range is too massive. I picked
+            the Dramas genre because it is more likely that actors in the same genres collaborate with one another.
+            So each node is an actor/actress, and the movie in which they collaborate are the links between them.
+            Each cluster more or less represent a movie.
+        </li>
+        <br>
+        <li>
+            D3 is helpful because it simplifies a lot of computational work which would be incredibly tedious, such
+            as scaling the x/y-axis, figuring the width of the bar etc. It also provides me with a great degree of
+            flexibility in visualing the data in different ways without additional hassle, such as the toggle
+            buttons that can sort the movie lengths differently. Lastly D3 enables me to include interactive
+            elements that adds to the functionality and engagement of my data visualization, such as the tool-tip in
+            the force-directed graph.
+        </li>
+        <br>
+        <li>
+            In my opinion, transitioning from simple d3 bar charts to other forms of hierchical graphs has a steep
+            learning curve, so if I were to be short on time, then d3 would not be the best tool for creating a
+            visualization. Other Libraries such as Matplotlib or Tableau are likely to be easier to work with, as
+            one doesn't need to be concerned with DOM manipulation etc. Secondly, D3 is not the best visualization
+            tool if your goal is to visually explore the data at the start of a data project cycle, as usually one
+            already has a plan/design in mind for visualizing the data already. Lastly, I think D3.js is not the
+            best tool, if one doesn't have website integration in mind.
+        </li>
+        <br>
+        <li>
+            I think a group of users that may struggle understanding my data visualization is visually, especially
+            with the Force-directed graph. Although I have used highly contrasting color to separate the node and
+            links, the nodes and links are relatively small. The fact that the information about the actors and
+            movies are displayed through hover layovers means that some physically disabled users may not be able to
+            move their mouse around to explore the data. In the Betterment article by Amanda Miller, she talked
+            about how tooltip labels are often difficult or impossible to do when using assistive technology.
+            Instead, show the output at all times. <br>
+            There is also the issue of non-responsive data visualization, which means that individuals who do not
+            have a desktop/laptop will probably find it challenging to understand my graphs.
+        </li>
+        <br>
+        <li>
+            Technical constraints are definitely a key factor. As this is my first time using d3.js, there are
+            elements that I find difficult to control such as margin control. I hardcoded quite a few of my margins,
+            which is likely to give some users on certain devices trouble reading my data. If possible I would also
+            like to share my data viz to peers who have different needs so that they can provide me meaningful user
+            feedback. There are certainly shortcomings that I cannot spot on my own.
+        </li>
+    </ol>
+</div> -->

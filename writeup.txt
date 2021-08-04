@@ -1,0 +1,57 @@
+About Me
+    Hey there! I am a rising senior studying Computer Science(A.I. track) and economics at Brown University. Getting insights out of data is something that I really like. Data visualization and machine learning are some techniques that I am using to achieve this. I am passionate about projects that intersect economy, community and environment for a more sustainable future. 
+    
+    I am a big open source believer since I think with sharing solutions we can achieve a lot more as a community. Therefore I mainly use python for my daily work, and am currently mastering R. On my website you can find some examples of my projects. 
+
+    Have fun in browsing through the content and thank you for visiting!
+
+Projects
+
+    An Analysis of the Impact of Air Travel on the Spread of Covid-19
+        - Wrangled with two different aviation(Bureau of Transportation Statistics) datasets to approximately find the total number of passengers flying between any two U.S. states(50 states + D.C.) in any given month(a total of 23,535 data points). 
+        - Joined the cleaned aviation dataset, Covid-19 dataset and U.S. state policy dataset(one-hot-encoded) to produce a panel data that include domestic passenger arrival amount, Covid positivity rate and whether a certain state policy was in effect from April to September 2020.   
+        - Performed regression tests(single, multiple, polynomial, fixed-effects model) to test the hypothesis that arrival passenger amount is positively correlated with the number of new Covid-19 cases. 
+        - The relationship is statistically significant, but is likely to be polynomial and non-linear.   
+
+
+
+
+    Detecting Depression from Social Media Text using Natural Language Processing
+        - Preprocessed(word tokenization, stemming) a raw Reddit dataset that comprised of over 3,000 posts/comments by 144 depressed and 349 non-depressed users 
+        - Implemented a Latent Semantic Indexing model that predicts the topic frequencies for each user in the dataset using the NLTK library
+        - Achieved 75% accuracy and F1 score respectively on binary classification of testing data
+
+    Mapreduce? 
+
+    Algorithmic game theory final project
+
+    Streamlit Projects?  
+
+
+Experiences
+
+    Office of Sustainability, Brown University, 
+
+    Bahar Lab, Brown University 
+
+    Jobstreet, Kuala Lumpur, Malaysia
+
+Skills
+    Python(Pandas, Geopandas, Numpy, Sci-Kit Learn, Matplotlib, Seaborn)
+    SQL
+    Data Analysis
+    Machine Learning(Logistic/Polynomial Regression, SVM, AdaBoost, Naive Bayes, PCA)
+    Deep Learning
+    Hypothesis Testing
+
+Relevant Coursework 
+    Machine Learning 
+    Deep Learning
+    Data Science
+    Statistical Inference 
+    Algorithmic Game Theory
+
+
+Contacts
+    LinkedIn
+    GitHub

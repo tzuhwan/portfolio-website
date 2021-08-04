@@ -1,0 +1,90 @@
+.navbar {
+    padding: 3vh 3vh 0 3vh;
+}
+
+
+.air-travel-banner {
+  width: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../media/flight.jpeg);
+  height: 50%;
+  background-position: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.nlp-banner {
+  width: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../media/smiley.jpeg);
+  height: 50%;
+  background-position: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.mapreduce-banner {
+  width: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../media/movies.jpeg);
+  height: 50%;
+  background-position: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.content-section {
+    margin: 10vh auto 0 auto;
+    width: 60%
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+figure {
+    margin: 0 auto;
+    width: 40%;
+    background-color:red;
+    text-align: center;
+}
+
+
+.img-container {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.icons-container {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+ul.icons-list {
+  cursor: default;
+  list-style: none;
+}
+
+.icons-list li {
+  list-style-type: none;
+  padding-right: 5em;
+  float: left;
+  /* background-color: blue; */
+}
+
+.icons-list a {
+  color: black;
+}
+
+.icons-list a:hover {
+  color: blue;
+  text-decoration: none;
+}

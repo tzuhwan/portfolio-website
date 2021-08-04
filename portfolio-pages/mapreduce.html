@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TzuHwan Seet</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="portfolio-page-style.css">
+    <script src="https://kit.fontawesome.com/4e98fca5ed.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+
+<body class="has-navbar-fixed-top">
+    <nav class="navbar is-transparent is-fixed-top is-success" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="../index.html">
+                <h2 class="title is-3 has-text-white">HWAN</h2>
+            </a>
+
+            <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu" id="navMenu">
+
+            <div class="navbar-end subtitle is-5">
+                <a class="navbar-item" href="">
+                    Resume
+                </a>
+                <a class="navbar-item" href="../index.html#portfolio">
+                    Portfolio
+                </a>
+                <a class="navbar-item" href="#footer">
+                    Contacts
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="mapreduce-banner hero is-medium has-text-centered">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title has-text-white is-2">
+                    Making Movie Recommendations Using MapReduce
+                </h1>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section hero is-medium content">
+        <div>
+            <p>This project is an implementation of the <a href="https://en.wikipedia.org/wiki/MapReduce">MapReduce
+                </a>Algorithm for parallel data processing. I applied MapReduce to
+                create movie recommendations pipeline based on 571,073 ratings from 26,960 movies. The pipeline is as
+                follows:</p>
+            <ul type="i">
+                <li>For every pair of movies A and B in the data set, find all people who rated both A and B;</li>
+                <li>Form ratings vectors for movies A and B;</li>
+                <li>Find the dot product between two vectors, the sum of each vector, the norm of each vector, and etc.
+                    to calculate the similarities between movie A and B based on Correlation, Regularized Correlation,
+                    Cosine Similarity and Jaccard Similarity metrics;
+                </li>
+                <li>Receives a movie title input and outputs the top-n most similar movies to it.</li>
+            </ul>
+            <p>The code is in a private GitHub repository and is available
+                upon request. More information about the specs of this project can be found <a
+                    href="https://cs1951a-s21-brown.github.io/assignments/mapreduce/mapreduce.html">here</a>.</p>
+        </div>
+    </section>
+
+
+    <footer class=" footer" id="footer">
+        <div class="content has-text-centered icons-container">
+            <ul class="icons-list">
+                <li><a href="mailto:tzuhwan_seet@brown.edu" class="fas fa-envelope-open-text fa-3x"></a>
+                </li>
+                <li><a href="https://github.com/tzuhwan" class="fab fa-github fa-3x"></a></li>
+                <li><a href="https://www.linkedin.com/in/tzuhwan-seet/" class="fab fa-linkedin-in fa-3x"></a></li>
+            </ul>
+        </div>
+        <br>
+        <div class="content has-text-centered">
+            <p>This website is built by TzuHwan Seet using HTML5 and Bulma CSS Framework. </p>
+        </div>
+    </footer>
+</body>

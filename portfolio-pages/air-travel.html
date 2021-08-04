@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TzuHwan Seet</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="portfolio-page-style.css">
+    <script src="https://kit.fontawesome.com/4e98fca5ed.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="has-navbar-fixed-top">
+
+    <nav class="navbar is-transparent is-fixed-top is-success" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="../index.html">
+                <h2 class="title is-3 has-text-white">HWAN</h2>
+            </a>
+
+            <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu" id="navMenu">
+
+            <div class="navbar-end subtitle is-5">
+                <a class="navbar-item" href="">
+                    Resume
+                </a>
+                <a class="navbar-item" href="../index.html#portfolio">
+                    Portfolio
+                </a>
+                <a class="navbar-item" href="#footer">
+                    Contacts
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="air-travel-banner hero is-medium has-text-centered">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title has-text-white is-2">
+                    Analyzing Impact of Air Travel on the Spread of
+                    Covid-19
+                </h1>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section hero is-medium content">
+        <p class="title is-2">Introduction</p>
+        <div>
+            <p>As varied as the government response against the Covid-19 pandemic across the world has been, a common
+                mitigation policy emerges: the restriction of airline travel. The public health motivation is intuitive
+                enough, but to what extent is the volume of air travel positively correlated with the spread of
+                Covid-19? This is the question my peers and I wanted to explore.</p>
+            <p>Our main goal is to test the following hypothesis at the 5% confidence level via bivariate, multiple,
+                polynomial and fixed-effects
+                regression:</p>
+            <ul>
+                <li>Null hypothesis: the number of domestic air passenger arrivals in a U.S.
+                    state is not correlated with the number of new COVID-19 cases in that state;</li>
+                <li>Alternate hypothesis: the number of domestic air passenger arrivals in a U.S.
+                    state is positively correlated with the number of new COVID-19 cases in that state.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class=" content-section hero is-medium content">
+        <p class="title is-2">Data Preprocessing</p>
+        <div class="content">
+            Preprocessing the data that we needed was arguably the most challenging step of the
+            project, as we needed to join many data points coming from different sources. We decided to center our
+            project in the U.S. because aviation and covid-19 data is relatively
+            more accessible and reliable. Our data came from 3 sources:
+        </div>
+        <br>
+        <div class="content">
+            <a href="https://covidtracking.com/data/">
+                <p class="title is-4">The COVID Tracking Project</p>
+            </a>
+            <p>We collected the COVID-19 data from The COVID Tracking Project, a reputable and reliable volunteer
+                organization launched
+                from The Atlantic that is dedicated to collecting and publishing the data required to understand the
+                COVID-19 outbreak
+                in the United States. Our COVID-19 sample on <span style="font-weight: bold;">the increase in positive
+                    cases</span> is comprehensively large, as it includes all 50
+                US states + Washington DC from Jan 2020 to Feb 2021. All we needed to do was to group by state and
+                month, and then sum up the daily increase in positive cases.</p>
+            <div class=" img-container">
+                <img src=" ../media/covid_data.png">
+                <p class="subtitle is-5" style="font-style: italic;">The positive increase from the month before for
+                    Alaska from 03/20 to 09/20</p>
+            </div>
+
+        </div>
+        <br>
+        <div class="content">
+            <a href=" https://github.com/USCOVIDpolicy/COVID-19-US-State-Policy-Database">
+                <p class="title is-4">COVID-19 US State Policy Database Domestic Air Travel Data</p>
+            </a>
+            <p>The purpose of the COVID-19 US State Policy Database for this project is provide policy contexts
+                of each
+                state that may affect individuals' mobility going in and out of states (quarantines, state of
+                emergency
+                etc.) so that we can minimize the residuals of our regression models. With the start date and end date
+                of each policy we encoded the data where 1 indicates that policy is active and 0 indicates that policy
+                is inactive for a particular month from March 2020 till September 2020. </p>
+            <div class=" img-container">
+                <img src=" ../media/policy_data.png">
+                <p class="subtitle is-5" style="font-style: italic;">Snippet of the
+                    policy data showing policies that were in effect for the different U.S. states in April 2020</p>
+            </div>
+        </div>
+        <br>
+        <div class=" content">
+            <a href="https://www.bts.gov/topics/airlines-and-airports/origin-and-destination-survey-data">
+                <p class="title is-4">Domestic Air Travel Data</p>
+            </a>
+            <p>Our air passenger arrival data for each U.S. state is compiled from two data sets from the U.S.
+                Department of Transportation’s Bureau of Transportation Statistics. The <span
+                    style="font-weight: bold;">DB1B dataset</span> provides a 10% sample of all booked flight
+                iteneraries on a quarterly basis, and covers from Q1 to Q3 2020. The <span
+                    style="font-weight: bold;">T100 dataset</span> breaks down the number of passengers flying
+                between
+                two airports(including layovers) by month, and covers Jan to nov 2020. We combined the two datasets
+                to
+                estimate the number of passengers travelling between every pair of states per month, excluding
+                layovers.
+            </p>
+
+            <p>In the end we are able to combine the data from these 3 sources into a panel data format that is very
+                useful for further analysis:</p>
+
+            <div class=" img-container">
+                <img src=" ../media/panel_data.png">
+                <p class="subtitle is-5" style="font-style: italic;">Snippet of the
+                    panel data for Alaska, Alabama & Arkansas</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section hero is-medium content">
+        <p class="title is-2">Methodology</p>
+        <div class="content">
+            <p>To match the monthly arrival data, we aggregated cases from the 15th of each month to the 15th of the
+                next, considering the 2-week COVID-19 incubation period. This gave us <span
+                    style="font-weight: bold;">294
+                    data points</span> from <span style="font-weight: bold;">49 states(+ Washington D.C.)</span> over
+                <span style="font-weight: bold;">6 months(Apr - Sep 2020)</span>.
+            </p>
+
+            <p>Our exploratary data analysis gave us the following insights:
+            </p>
+            <ol type="i">
+                <li>The relationship between number of arrival passengers and the no. of new covid-19 cases in a state
+                    is likely to be non-linear;</li>
+                <li>States with large populations had more arrivals and cases, which suggests that state population is
+                    possibly a confounding variable;
+                </li>
+                <li>Passengers are associated with different levels of Covid infection risk, depending on their origin
+                    states;</li>
+            </ol>
+            <div class=" img-container">
+                <img src=" ../media/data_exploration.png">
+            </div>
+        </div>
+
+        <div class="content">
+            <p class="title is-4">Simple Linear Regression</p>
+            <p>We ran simple linear regression with different version of our variables:</p>
+            <ol type="i">
+                <li><span style="font-weight: bold;">Model 1A</span> - No. of arrivals vs no. of cases;</li>
+                <li><span style="font-weight: bold;">Model 1B</span> - Percentage change in arrivals vs percentage
+                    change in cases;</li>
+                <li><span style="font-weight: bold;">Model 1C</span> - Per capita arrivals vs per capita cases;</li>
+                <li><span style="font-weight: bold;">Model 1C(W)</span> - weighted p.c. arrivals vs per capita cases
+                </li>
+            </ol>
+
+            <p>The following is the result of the simple regression models:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>P-Value</th>
+                        <th>Coefficient</th>
+                        <th>Adjusted R<sup>2</sup></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1A</td>
+                        <td>0.00</td>
+                        <td>0.083</td>
+                        <td>0.611</td>
+                    </tr>
+                    <tr>
+                        <td>1B</td>
+                        <td>0.208</td>
+                        <td>-0.095</td>
+                        <td>0.005</td>
+                    </tr>
+                    <tr>
+                        <td>1C</td>
+                        <td>0.00</td>
+                        <td>0.0016</td>
+                        <td>0.0.047</td>
+                    </tr>
+                    <tr>
+                        <td>1C(W)</td>
+                        <td>0.00</td>
+                        <td>3.96</td>
+                        <td>0.065</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class=" img-container">
+                <img src=" ../media/model_1cw.png">
+            </div>
+
+            <p>While Model 1A had the highest R<sup>2</sup>, this likely reflects a spurious correlation as
+                population
+                is a
+                confounding factor that influences both our independent and dependent variables. To control for
+                population, we experimented with the percentage change(Model 1B) and per capita
+                values(Model 1C) of both variables. The R<sup>2</sup> value of Model 1B is poor potentially
+                because
+                percentage change violates the i.i.d. assumption.</p>
+            <p>We extended Model 1C by weighing the number of arrivals by the per capita new Covid-19 cases of the
+                origin state. Not only model 1C(W) gives the best adjusted R<sup>2</sup>, but its p-value is
+                statistically signficant at the 5% level, so we can reject the null hypothesis. Model 1C(W) serves as
+                the base model for our
+                subsequent
+                analyses.</p>
+        </div>
+
+        <div class="content">
+            <p class="title is-4">Polynomial Regression</p>
+            <p>We used a third degree polynomial model, as fitting the data to polynomial curves of increasing degrees
+                increased the R<sup>2</sup> value, but this improvement plateaus for degrees > 3: </p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Regressor</th>
+                        <th>P-Value</th>
+                        <th>Coefficient</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>X</td>
+                        <td>0.002</td>
+                        <td>16.9</td>
+                    </tr>
+                    <tr>
+                        <td>X<sup>2</sup></td>
+                        <td>0.000</td>
+                        <td>-3.30 x 10<sup>4</sup></td>
+                    </tr>
+                    <tr>
+                        <td>X<sup>3</sup></td>
+                        <td>0.001</td>
+                        <td>-1.80 x 10<sup>7</sup></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class=" img-container">
+                <img src=" ../media/model_2.png">
+            </div>
+
+            <p>All polynomial terms have significant correlation with per capita number of new Covid-19 cases at the 5%
+                confidence level, so the null hypothesis is rejected. The adjusted R<sup>2</sup> is 0.118, which is
+                higher than
+                that of the Model 1C(W) linear
+                regression model. This relationship between weighted per capita arrivals and per capita Covid-19 cases
+                is therefore likely to be polynomial rather than linear.</p>
+        </div>
+
+        <div class="content">
+            <p class="title is-4">Multiple Regression</p>
+            <p>All the policy variables are <span style="font-weight: bold;">negatively
+                    correlated</span> with weighted
+                per capita number of cases, with the relationship being significant at the 5% level for <span
+                    style="font-weight: bold;">Stay-at-Home Orders</span> and <span
+                    style="font-weight: bold;">Quarantine Mandate</span>. The p-value of the weighted_percap coefficient
+                is less than 0.05, so it follows that the null hypothesis is
+                rejected at the 5% confidence level.</p>
+            <p>The adjusted R<sup>2</sup> is 0.198, which is higher than that of simple linear regression. Adding
+                Covid-19 state
+                policies to the model does reduce omitted variable bias.</p>
+            <div class=" img-container">
+                <img src=" ../media/multiple_regression_results.png">
+                <p class="subtitle is-5" style="font-style: italic;">Multiple regression results</p>
+            </div>
+        </div>
+
+        <div class="content">
+            <p class="title is-4">Fixed Effects Model</p>
+            <p>One of the main challenges in investigating the hypothesis is the presence of substantial omitted
+                variable bias, as it
+                is impossible to account for all the factors that affect the number of positive covid-19 cases of
+                different US states.
+                Statewide public health policies, healthcare infrastructure, social/political attitudes towards the
+                pandemic may be
+                correlated with the number of COVID-19 cases. Additionally
+                some of these
+                factors might be very hard or even impossible to measure. An entity-fixed effects regression model, in
+                theory,
+                is able to
+                control omitted variables in panel data that vary across entities (states) but not over time.</p>
+            <p>The results show that the coefficient of weighted_percap and other policy variables are statistically
+                insignificant at the 5% level(0.47), so we fail to reject the
+                null hypothesis. The fixed-effects model yields the highest R<sup>2</sup> value
+                amongst the regression models, 0.2344.</p>
+
+            <div class=" img-container">
+                <img style="height: 100%; width: 80%;" src=" ../media/fixed-effects-result.png">
+                <p class="subtitle is-5" style="font-style: italic;">Fixed effects results</p>
+            </div>
+        </div>
+
+        <div class="content">
+            <p class="title is-4">Final Data Visualization</p>
+            <div class="img-container">
+                <img style="height: 100%; width: 60%;" src=" ../media/map_viz.png">
+            </div>
+            <p>Given the geographical nature of the data, a map provides a useful visualization that allows us to
+                compare across different states at one glance and more intuitively understand the relationship between
+                arrivals and Covid-19 cases. The map supports the results of our statistical test by showing that there
+                is some positive(but limited) correlation between the independent and dependent variables.</p>
+        </div>
+    </section>
+
+    <section class="content-section hero is-medium content">
+        <p class="title is-2">Conclusion</p>
+        <p>According to our simple linear regression, polynomial and multiple regression models, there exists a
+            statistically
+            signficant positive correlation between weighted air passenger arrivals and new Covid-19 cases per capita.
+            In other words, it is very unlikely to yield our sample results if the null hypothesis(no correlation
+            between air travel and increase in Covid-19 cases) were true.
+            However the
+            independent variable explains only a small proportion of the variance in the independent variable compared
+            to the dummy
+            state policy variables.</p>
+
+        <div class="content">
+            <p class="title is-4">Resources & Source Code</p>
+            <ul>
+                <li><a href="https://github.com/CS1951A-S21-Brown/pandaIrmic_final_project">Github repo</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <footer class="footer" id="footer">
+        <div class="content has-text-centered icons-container">
+            <ul class="icons-list">
+                <li><a href="mailto:tzuhwan_seet@brown.edu" class="fas fa-envelope-open-text fa-3x"></a></li>
+                <li><a href="https://github.com/tzuhwan" class="fab fa-github fa-3x"></a></li>
+                <li><a href="https://www.linkedin.com/in/tzuhwan-seet/" class="fab fa-linkedin-in fa-3x"></a></li>
+            </ul>
+        </div>
+        <br>
+        <div class="content has-text-centered">
+            <p>This website is built by TzuHwan Seet using HTML5 and Bulma CSS Framework. </p>
+        </div>
+    </footer>
+</body>
+
+</html>
