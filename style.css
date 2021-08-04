@@ -21,6 +21,11 @@
   width: 80%;
 }
 
+.about-me .is-ancestor {
+  margin: 0 auto;
+  width: 80%;
+}
+
 .portfolio {
   margin: 0 auto;
   width: 80%;
