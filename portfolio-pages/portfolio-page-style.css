@@ -36,6 +36,17 @@
   position: relative;
 }
 
+.thermal-banner {
+  width: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../media/data.jpeg);
+  height: 50%;
+  background-position: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
 .content-section {
     margin: 10vh auto 0 auto;
     width: 60%
