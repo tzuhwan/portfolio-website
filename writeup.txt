@@ -13,7 +13,9 @@ Projects
         - Performed regression tests(single, multiple, polynomial, fixed-effects model) to test the hypothesis that arrival passenger amount is positively correlated with the number of new Covid-19 cases. 
         - The relationship is statistically significant, but is likely to be polynomial and non-linear.   
 
-
+    Building A Data Pipeline for Thermal Data
+        - Wrote an R script that automatically extracts raw thermal utility data from sub-meters in campus buildings on a daily basis
+        - 
 
 
     Detecting Depression from Social Media Text using Natural Language Processing
@@ -55,3 +57,5 @@ Relevant Coursework
 Contacts
     LinkedIn
     GitHub
+
+

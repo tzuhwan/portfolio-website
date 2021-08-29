@@ -30,7 +30,6 @@
         </div>
 
         <div class="navbar-menu" id="navMenu">
-
             <div class="navbar-end subtitle is-5">
                 <a class="navbar-item"
                     href="https://drive.google.com/file/d/12pnSqKTWy0cPrA_zyFTjWz4-vHnhd4IG/view?usp=sharing"
@@ -51,32 +50,44 @@
         <div class="hero-body">
             <div class="container">
                 <h1 class="title has-text-white is-2">
-                    Making Movie Recommendations Using MapReduce
+                    Building An ETL Pipeline for Building Thermal Data
                 </h1>
             </div>
         </div>
     </section>
 
     <section class="content-section hero is-medium content">
-        <div>
-            <p>This project is an implementation of the <a href="https://en.wikipedia.org/wiki/MapReduce"
-                    target="_blank" rel="noopener noreferrer">MapReduce
-                </a>Algorithm for parallel data processing. I applied MapReduce to
-                create movie recommendations pipeline based on 571,073 ratings from 26,960 movies. The pipeline is as
-                follows:</p>
-            <ul type="i">
-                <li>For every pair of movies A and B in the data set, find all people who rated both A and B;</li>
-                <li>Form ratings vectors for movies A and B;</li>
-                <li>Find the dot product between two vectors, the sum of each vector, the norm of each vector, and etc.
-                    to calculate the similarities between movie A and B based on Correlation, Regularized Correlation,
-                    Cosine Similarity and Jaccard Similarity metrics;
+        <div class="content">
+
+            <p>For the energy engineers at the Brown Office of Sustainability, a key challenge is being able to
+                analyze and act on quality campus building utility data as real-time as possible. As an OS data intern
+                in the summer of 2021, I built a data pipeline that automatically extracts, transforms and loads
+                heat-utility
+                data from an energy information database to a Postgresql database, from which we can create meaningful
+                analytics. The raw data originates from 44 thermal sub-meters in different campus buildings that emit
+                utility readings at every 15-min interval. This project is useful because:</p>
+            <ol type="i">
+                <li>In the event of a sub-meter defect detected from the processed data, the energy engineers can
+                    respond immediately;</li>
+                <li>The Office of Sustainability can make Year-Over-Year comparison on different levels of
+                    aggregation(quarterly, weekly, daily, hourly) to set specific building utility optimization goals;
                 </li>
-                <li>Receives a movie title input and outputs the top-n most similar movies to it.</li>
-            </ul>
-            <p>The code is in a private GitHub repository and is available
-                upon request. More information about the specs of this project can be found <a
-                    href="https://cs1951a-s21-brown.github.io/assignments/mapreduce/mapreduce.html" target="_blank"
-                    rel="noopener noreferrer">here</a>.</p>
+                <li>With some modifications the scripts can be used for other categories of meters in the energy
+                    information database.</li>
+            </ol>
+
+            <p>I wrote the scripts in R, and created interactive dashboard on Tableau. One of the scripts also
+                automatically
+                generates a report on the weekly usage of the targeted thermal meters and uploads it to a shared Google
+                Drive folder for quick overview acess.</p>
+
+            <p>Because I cannot share organizational data, I'll share some sreenshots of the dashboard instead.</p>
+
+            <div class=" img-container">
+                <img style="height: 100%; width: 100%;" src=" ../media/winpm-dashboard.png">
+            </div>
+
+
         </div>
     </section>
 
@@ -94,7 +105,9 @@
         </div>
         <br>
         <div class="content has-text-centered">
-            <p>This website is built by TzuHwan Seet using HTML5 and Bulma CSS Framework. </p>
+            <p>This website is built by TzuHwan Seet using HTML5 and Bulma CSS Framework.</p>
         </div>
     </footer>
 </body>
+
+</html>

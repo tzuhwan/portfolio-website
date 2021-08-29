@@ -34,7 +34,8 @@
 
             <div class="navbar-end subtitle is-5">
                 <a class="navbar-item"
-                    href="https://drive.google.com/file/d/12pnSqKTWy0cPrA_zyFTjWz4-vHnhd4IG/view?usp=sharing">
+                    href="https://drive.google.com/file/d/12pnSqKTWy0cPrA_zyFTjWz4-vHnhd4IG/view?usp=sharing"
+                    target="_blank" rel="noopener noreferrer">
                     Resume
                 </a>
                 <a class="navbar-item" href="../index.html#portfolio">
@@ -61,7 +62,8 @@
         <p class="title is-2">Introduction</p>
         <div>
             <p>Depression is one of the main causes of disability globally, and suicide resulted from depression is the
-                <a href="https://www.who.int/news-room/fact-sheets/detail/depression">second leading cause of
+                <a href="https://www.who.int/news-room/fact-sheets/detail/depression" target="_blank"
+                    rel="noopener noreferrer">second leading cause of
                     death </a>for young adults. Depression often remains undiagnosed because of social
                 stigma, so suicide preventative programs can fail to reach people who need help. With the surge of
                 social media use over the past decade, people are more likely to talk about metnal health issues and
@@ -69,7 +71,7 @@
                 useful information about an individual's mental health from online discussions.
             </p>
             <p>As part of our Deep Learning final project, we decided to re-implement a paper, <a
-                    href="https://arxiv.org/abs/2011.01695">Detecting
+                    href="https://arxiv.org/abs/2011.01695" target="_blank" rel="noopener noreferrer">Detecting
                     Early
                     Onset of
                     Depression from Social Media Text using Learned Confidence Scores </a></span>by Ana-Maria Bucur and
@@ -82,7 +84,8 @@
     <section class="content-section hero is-medium content">
         <p class="title is-2">Data</p>
         <div>
-            <p>We utilized the <a href="https://erisk.irlab.org/">eRisk (Early Detection on the Internet) dataset</a>,
+            <p>We utilized the <a href="https://erisk.irlab.org/" target="_blank" rel="noopener noreferrer">eRisk (Early
+                    Detection on the Internet) dataset</a>,
                 which is developed from
                 an annual
                 workshop held by CLEF
@@ -204,7 +207,8 @@ for user in users:
             </div>
             <br>
             <p>First we represented each user as a bag of words(BoW). We then used
-                <a href="https://en.wikipedia.org/wiki/Latent_semantic_analysis#Latent_semantic_indexing">Latent
+                <a href="https://en.wikipedia.org/wiki/Latent_semantic_analysis#Latent_semantic_indexing"
+                    target="_blank" rel="noopener noreferrer">Latent
                     Semantic Indexing(LSI) </a> to produce a topic embedding for each user, which we can feed into our
                 neural network layers.
             </p>
@@ -422,7 +426,8 @@ predictions = model.predict(topic_embeddings[-TEST_SIZE:])
         <div class="content">
             <p class="title is-4">Resources & Source Code</p>
             <ul>
-                <li><a href="https://github.com/tzuhwan/dl-final-project">Github repo</a></li>
+                <li><a href="https://github.com/tzuhwan/dl-final-project" target="_blank"
+                        rel="noopener noreferrer">Github repo</a></li>
             </ul>
         </div>
 
@@ -436,8 +441,10 @@ predictions = model.predict(topic_embeddings[-TEST_SIZE:])
             <ul class="icons-list">
                 <li><a href="mailto:tzuhwan_seet@brown.edu" class="fas fa-envelope-open-text fa-3x"></a>
                 </li>
-                <li><a href="https://github.com/tzuhwan" class="fab fa-github fa-3x"></a></li>
-                <li><a href="https://www.linkedin.com/in/tzuhwan-seet/" class="fab fa-linkedin-in fa-3x"></a></li>
+                <li><a href="https://github.com/tzuhwan" target="_blank" rel="noopener noreferrer"
+                        class="fab fa-github fa-3x"></a></li>
+                <li><a href="https://www.linkedin.com/in/tzuhwan-seet/" target="_blank" rel="noopener noreferrer"
+                        class="fab fa-linkedin-in fa-3x"></a></li>
             </ul>
         </div>
         <br>
